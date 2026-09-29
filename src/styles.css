@@ -1,0 +1,80 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Manrope", Arial, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sage: var(--sage);
+  --color-sage-deep: var(--sage-deep);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --shadow-editorial: 0 18px 50px color-mix(in oklab, var(--foreground) 14%, transparent);
+}
+
+:root {
+  --background: oklch(0.965 0.014 83);
+  --foreground: oklch(0.255 0.025 126);
+  --surface: oklch(0.99 0.007 83);
+  --primary: oklch(0.365 0.045 133);
+  --primary-foreground: oklch(0.965 0.014 83);
+  --secondary: oklch(0.92 0.026 105);
+  --secondary-foreground: oklch(0.255 0.025 126);
+  --muted: oklch(0.91 0.018 87);
+  --muted-foreground: oklch(0.46 0.026 120);
+  --accent: oklch(0.705 0.086 73);
+  --accent-foreground: oklch(0.255 0.025 126);
+  --border: oklch(0.82 0.025 102);
+  --input: oklch(0.82 0.025 102);
+  --ring: oklch(0.49 0.057 133);
+  --sage: oklch(0.54 0.055 125);
+  --sage-deep: oklch(0.365 0.045 133);
+  --gold: oklch(0.65 0.1 72);
+  --gold-light: oklch(0.79 0.09 79);
+}
+
+* { border-color: var(--border); }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--background); color: var(--foreground); }
+a { text-underline-offset: 4px; }
+::selection { background: var(--sage); color: var(--primary-foreground); }
+
+@layer components {
+  .section-pad { @apply px-5 py-16 sm:px-6 sm:py-20 lg:py-24; }
+  .eyebrow { @apply text-[10px] font-semibold uppercase tracking-[0.18em] text-gold sm:text-[11px]; }
+  .section-title { @apply mt-4 font-display text-4xl leading-tight sm:text-5xl; }
+  .button-primary { @apply inline-flex min-h-12 items-center justify-center gap-2 bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring; }
+  .button-dark { @apply min-h-11 items-center justify-center gap-2 bg-foreground px-5 text-sm font-semibold text-background transition-colors hover:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring; }
+  .button-outline { @apply inline-flex min-h-12 items-center justify-center gap-2 border border-foreground/25 px-6 text-sm font-semibold transition-colors hover:border-foreground hover:bg-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring; }
+  .button-gold { @apply inline-flex min-h-13 items-center justify-center gap-2 bg-gold px-6 text-sm font-semibold text-foreground transition-colors hover:bg-gold-light focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-foreground; }
+  .button-light-outline { @apply inline-flex min-h-13 items-center justify-center gap-2 border border-primary-foreground/35 px-6 text-sm font-semibold transition-colors hover:bg-primary-foreground/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-foreground; }
+  .nav-link { @apply transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring; }
+  .contact-link { @apply flex w-fit items-center gap-3 transition-colors hover:text-sage focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring; }
+  .focus-ring { @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring; }
+  .hero-frame { aspect-ratio: 4 / 5; max-height: 640px; }
+}
+
+@keyframes fade-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+.fade-up { animation: fade-up 700ms ease both; }
+.fade-up:nth-child(2) { animation-delay: 120ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
